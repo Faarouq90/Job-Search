@@ -1,6 +1,6 @@
 # Job Hunter — automated daily graduate job search
 
-Fetches jobs (Adzuna + Greenhouse/Lever/Ashby + RSS) → filters seniors/wrong region →
+Fetches jobs (Adzuna + Greenhouse/Lever/Ashby + amazon.jobs + RSS) → filters seniors/wrong region →
 dedupes into PostgreSQL → scores fit 0–100 with Claude → emails you a daily digest.
 
 ## Pipeline
@@ -39,7 +39,7 @@ python main.py tailor 123             # tailored CV bullets + cover letter -> .m
 Job IDs are printed in every digest email.
 
 ## Tuning (config.py)
-- `ADZUNA_QUERIES` — search terms (12 included; each costs 1 API call/day)
+- `ADZUNA_QUERIES` — search terms (30 included; each costs 1 API call/day)
 - `GREENHOUSE_BOARDS / LEVER_BOARDS / ASHBY_BOARDS` — company ATS tokens.
   Find a company's token in its careers-page URL (e.g. `boards.greenhouse.io/stripe`
   → token `stripe`). Wrong tokens are skipped harmlessly — verify and extend the

@@ -41,18 +41,40 @@ JOB_EXPIRY_DAYS    = 35                                   # mark stale jobs expi
 # Each term = one Adzuna query (Ireland-wide). Keep the list short; Adzuna
 # free tier allows ~250 calls/day and we use 1 call per term per run.
 ADZUNA_QUERIES = [
+    # security
     "graduate security",
     "junior security analyst",
     "SOC analyst",
     "cloud security",
     "DevSecOps",
+    "security intern",
+    # cloud / devops / infra
     "graduate devops",
     "junior devops",
     "cloud engineer graduate",
+    "junior cloud engineer",
+    "associate cloud engineer",
+    "junior infrastructure engineer",
+    "graduate site reliability engineer",
+    "junior network engineer",
+    # software
     "graduate software engineer",
     "junior software engineer",
-    "security intern",
     "software intern",
+    "junior developer",
+    # IT / sysadmin / support
+    "graduate IT",
+    "junior IT",
+    "IT intern",
+    "IT support",
+    "IT technician",
+    "junior system administrator",
+    "system administrator",
+    "service desk analyst",
+    "helpdesk",
+    "desktop support",
+    "technical support engineer",
+    "IT operations",
 ]
 
 # ---------------------------------------------- ATS boards (public APIs, no key)
@@ -89,16 +111,21 @@ SENIOR_KEYWORDS = [
     "sr.", "sr ", "iii", " iv",
 ]
 # Locations must contain one of these (case-insensitive) OR be remote-friendly.
-LOCATION_KEYWORDS = ["dublin", "ireland", "remote", "hybrid", "leinster", "kildare", "wicklow", "meath"]
+LOCATION_KEYWORDS = ["dublin", "cork", "ireland", "remote", "hybrid", "leinster", "munster", "kildare", "wicklow", "meath"]
 
 # ------------------------------------------------------------- candidate profile
 CANDIDATE_PROFILE = """
 Name: Faarouq Asaju
-Location: Dublin, Ireland (work authorisation: Stamp 1G graduate permission in progress)
+Location: Dublin, Ireland — also happy to work in Cork or anywhere in Ireland, and remote/hybrid
+(work authorisation: Stamp 1G graduate permission in progress)
 Education: BSc (Hons) Computer Science, Griffith College Dublin, graduating June 2026, 2:1
 Target roles (priority order): Cloud Security Engineer, SOC Analyst, Cybersecurity Analyst,
-DevSecOps, DevOps, Cloud Engineer, Platform Engineer, Software Engineer, and any
-graduate/junior/entry-level/internship tech role with transferable fit.
+DevSecOps, DevOps, Cloud Engineer, Platform Engineer, Site Reliability Engineer,
+Infrastructure Engineer, Network Engineer, System Administrator, Software Engineer,
+Backend/Full-stack Developer, QA/Test Engineer, IT Support / Service Desk / Helpdesk,
+IT Technician, Technical Support Engineer, IT Operations, Data Analyst/Engineer, and any
+other graduate/junior/entry-level/internship tech or IT role with transferable fit —
+cast a wide net; score any role the candidate could plausibly do at entry level.
 Level: GRADUATE / ENTRY-LEVEL / JUNIOR / INTERN ONLY. No senior, staff, lead, manager,
 or roles requiring 3+ years professional experience.
 

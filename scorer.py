@@ -18,7 +18,8 @@ SCORING RULES:
   If the role requires 3+ years professional experience, or the title/description
   implies senior/staff/lead/manager, set seniority to "mid" or "senior" and score <= 15.
 - score 0-100 = probability-weighted fit: skills overlap, level match, location
-  (Dublin/Ireland/remote-from-Ireland strongly preferred), visa friendliness
+  (Dublin, Cork, anywhere in Ireland, or remote-from-Ireland all equally fine;
+  do not penalise Cork or other Irish locations vs Dublin), visa friendliness
   (large multinationals and companies stating visa support score higher; the
   candidate is on Stamp 1G graduate permission).
 - reason: ONE punchy sentence (max 25 words) explaining the score. Mention the

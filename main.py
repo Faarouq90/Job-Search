@@ -12,7 +12,7 @@ import config  # noqa: F401  (validates required env vars on import)
 import db
 import digest
 import scorer
-from fetchers import adzuna, ats, rss, prefilter
+from fetchers import adzuna, amazon, ats, rss, prefilter
 
 
 def run():
@@ -20,7 +20,7 @@ def run():
     db.init(conn)
 
     # 1. fetch everything
-    jobs = adzuna.fetch() + ats.fetch_all() + rss.fetch()
+    jobs = adzuna.fetch() + ats.fetch_all() + amazon.fetch() + rss.fetch()
     print(f"[run] fetched {len(jobs)} total")
 
     # 2. cheap pre-filter (senior titles, wrong region) before spending tokens
