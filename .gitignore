@@ -1,0 +1,21 @@
+# Secrets — never commit real credentials
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Tailored output written by `python main.py tailor <id>`
+tailored_*.md
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
