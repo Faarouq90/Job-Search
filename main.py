@@ -5,12 +5,14 @@ Commands:
     python main.py tailor <job_id>     # tailored CV bullets + cover letter
     python main.py status <job_id> applied|saved|rejected
     python main.py stats               # quick DB summary
+    python main.py testnotify          # send a Telegram test message
 """
 import sys
 
 import config  # noqa: F401  (validates required env vars on import)
 import db
 import digest
+import notify
 import scorer
 from fetchers import adzuna, amazon, ats, rss, prefilter
 
@@ -40,6 +42,7 @@ def run():
     candidates = db.digest_candidates(conn)
     if digest.send(candidates):
         db.mark_notified(conn, [c["id"] for c in candidates])
+    notify.send_telegram(candidates)  # best-effort; never affects mark_notified
 
     # 6. housekeeping
     db.mark_below_threshold(conn)
@@ -70,5 +73,7 @@ if __name__ == "__main__":
         print(f"job {sys.argv[2]} -> {sys.argv[3]}")
     elif cmd == "stats":
         stats()
+    elif cmd == "testnotify":
+        print("test message sent" if notify.send_test() else "test message NOT sent — see warning above")
     else:
         print(__doc__)

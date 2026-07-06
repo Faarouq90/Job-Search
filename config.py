@@ -31,6 +31,9 @@ SMTP_USER = env("SMTP_USER")            # your gmail address
 SMTP_PASS = env("SMTP_PASS")            # gmail App Password (not your login password)
 DIGEST_TO = env("DIGEST_TO", "faarouqsocials@gmail.com")
 
+TELEGRAM_BOT_TOKEN = env("TELEGRAM_BOT_TOKEN")  # from @BotFather
+TELEGRAM_CHAT_ID   = env("TELEGRAM_CHAT_ID")    # your chat with the bot
+
 # ------------------------------------------------------------------- tuning
 MIN_DIGEST_SCORE   = int(env("MIN_DIGEST_SCORE", "55"))   # jobs below this never emailed
 MAX_JOBS_PER_RUN   = int(env("MAX_JOBS_PER_RUN", "120"))  # cap on new jobs scored per run
