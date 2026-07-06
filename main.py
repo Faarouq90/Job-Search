@@ -14,7 +14,7 @@ import db
 import digest
 import notify
 import scorer
-from fetchers import adzuna, amazon, ats, rss, prefilter
+from fetchers import amazon, ats, rss, prefilter
 
 
 def run():
@@ -22,7 +22,7 @@ def run():
     db.init(conn)
 
     # 1. fetch everything
-    jobs = adzuna.fetch() + ats.fetch_all() + amazon.fetch() + rss.fetch()
+    jobs = ats.fetch_all() + amazon.fetch() + rss.fetch()
     print(f"[run] fetched {len(jobs)} total")
 
     # 2. cheap pre-filter (senior titles, wrong region) before spending tokens
@@ -32,11 +32,11 @@ def run():
     # 3. dedupe + insert; only genuinely-new jobs move on
     new_jobs = db.upsert_jobs(conn, jobs)
     print(f"[run] {len(new_jobs)} new after dedupe")
-    new_jobs = new_jobs[: config.MAX_JOBS_PER_RUN]
 
-    # 4. AI scoring
-    if new_jobs:
-        db.save_scores(conn, scorer.score_jobs(new_jobs))
+    # 4. AI scoring — newest first, incl. any backlog past runs couldn't afford
+    to_score = db.unscored_jobs(conn, config.MAX_JOBS_PER_RUN)
+    if to_score:
+        db.save_scores(conn, scorer.score_jobs(to_score))
 
     # 5. digest email for everything 'new' above threshold (incl. prior failed sends)
     candidates = db.digest_candidates(conn)

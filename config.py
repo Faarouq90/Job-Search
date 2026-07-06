@@ -22,9 +22,6 @@ DATABASE_URL      = env("DATABASE_URL", required=True)
 ANTHROPIC_API_KEY = env("ANTHROPIC_API_KEY", required=True)
 ANTHROPIC_MODEL   = env("ANTHROPIC_MODEL", "claude-sonnet-4-6")
 
-ADZUNA_APP_ID  = env("ADZUNA_APP_ID")   # free at developer.adzuna.com
-ADZUNA_APP_KEY = env("ADZUNA_APP_KEY")
-
 SMTP_HOST = env("SMTP_HOST", "smtp.gmail.com")
 SMTP_PORT = int(env("SMTP_PORT", "587"))
 SMTP_USER = env("SMTP_USER")            # your gmail address
@@ -40,70 +37,38 @@ MAX_JOBS_PER_RUN   = int(env("MAX_JOBS_PER_RUN", "120"))  # cap on new jobs scor
 SCORE_BATCH_SIZE   = 8                                    # jobs per Claude call
 JOB_EXPIRY_DAYS    = 35                                   # mark stale jobs expired
 
-# ------------------------------------------------------- Adzuna search terms
-# Each term = one Adzuna query (Ireland-wide). Keep the list short; Adzuna
-# free tier allows ~250 calls/day and we use 1 call per term per run.
-ADZUNA_QUERIES = [
-    # security
-    "graduate security",
-    "junior security analyst",
-    "SOC analyst",
-    "cloud security",
-    "DevSecOps",
-    "security intern",
-    # cloud / devops / infra
-    "graduate devops",
-    "junior devops",
-    "cloud engineer graduate",
-    "junior cloud engineer",
-    "associate cloud engineer",
-    "junior infrastructure engineer",
-    "graduate site reliability engineer",
-    "junior network engineer",
-    # software
-    "graduate software engineer",
-    "junior software engineer",
-    "software intern",
-    "junior developer",
-    # IT / sysadmin / support
-    "graduate IT",
-    "junior IT",
-    "IT intern",
-    "IT support",
-    "IT technician",
-    "junior system administrator",
-    "system administrator",
-    "service desk analyst",
-    "helpdesk",
-    "desktop support",
-    "technical support engineer",
-    "IT operations",
-]
-
 # ---------------------------------------------- ATS boards (public APIs, no key)
 # Greenhouse: https://boards-api.greenhouse.io/v1/boards/<token>/jobs
 # Lever:      https://api.lever.co/v0/postings/<token>?mode=json
 # Ashby:      https://api.ashbyhq.com/posting-api/job-board/<token>
 # Edit freely — unknown tokens fail gracefully (skipped with a log line).
 GREENHOUSE_BOARDS = [
-    "stripe", "datadoghq", "cloudflare", "hubspot", "intercom",
+    "stripe", "datadog", "cloudflare", "hubspot", "intercom",
     "tines", "elastic", "gitlab", "twilio", "okta",
     # Irish HQ / large Dublin offices (verified to list Irish roles)
     "flipdish", "letsgetchecked", "squarespace", "toast", "mongodb", "udemy",
+    # verified live with Irish/remote roles (probed 2026-07-06)
+    "dropbox", "airbnb", "pinterest", "reddit", "coinbase", "klaviyo",
+    "qualtrics", "vercel", "grafanalabs", "remotecom",
+    "poppulo",    # Cork
+    "smartbear",  # Galway
 ]
 LEVER_BOARDS = [
-    "tenable", "kodifhq",
+    # (tenable + kodifhq boards went dead; add new tokens here if found)
 ]
 ASHBY_BOARDS = [
     "openai", "ramp",
     "wayflyer",   # Dublin fintech
+    # verified live with Irish/remote roles (probed 2026-07-06)
+    "linear", "supabase", "posthog",
 ]
 
 # ------------------------------------------------------------- extra RSS feeds
 # Generic RSS/Atom job feeds. Add any feed URL that emits job postings.
 RSS_FEEDS = [
     # ("source name", "feed url")
-    # e.g. ("WeWorkRemotely-DevOps", "https://weworkremotely.com/categories/remote-devops-sysadmin-jobs.rss"),
+    ("WeWorkRemotely-DevOps", "https://weworkremotely.com/categories/remote-devops-sysadmin-jobs.rss"),
+    ("WeWorkRemotely-Programming", "https://weworkremotely.com/categories/remote-programming-jobs.rss"),
 ]
 
 # --------------------------------------------- pre-filter (saves Claude tokens)

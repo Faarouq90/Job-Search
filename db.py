@@ -96,6 +96,22 @@ def save_scores(conn, scored: list[dict]):
             )
 
 
+def unscored_jobs(conn, limit: int) -> list[dict]:
+    """'new' jobs awaiting a score, freshest first (backlog drains over runs)."""
+    with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        cur.execute(
+            """
+            SELECT id, title, company, location, description
+            FROM jobs
+            WHERE status = 'new' AND score IS NULL
+            ORDER BY first_seen DESC
+            LIMIT %s
+            """,
+            (limit,),
+        )
+        return cur.fetchall()
+
+
 def digest_candidates(conn):
     """New, scored jobs above threshold, best first."""
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
