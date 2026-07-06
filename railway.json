@@ -3,7 +3,7 @@
   "build": { "builder": "NIXPACKS" },
   "deploy": {
     "startCommand": "python main.py run",
-    "cronSchedule": "30 7 * * *",
+    "cronSchedule": "0 7,16 * * *",
     "restartPolicyType": "NEVER"
   }
 }
