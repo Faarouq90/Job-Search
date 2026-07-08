@@ -28,9 +28,15 @@ def _send(text: str) -> bool:
 
 
 def send_telegram(jobs: list[dict]) -> bool:
-    """Send one summary message: total count + top 5 jobs by score. Never raises."""
+    """Send one summary message: total count + top 5 jobs by score. Never raises.
+
+    When nothing scored above the threshold, still sends a short heads-up so a
+    quiet run is distinguishable from a broken one.
+    """
     if not jobs:
-        print("[notify] no jobs above threshold; no Telegram message sent")
+        if _send(f"😴 Search ran — no new matches above {config.MIN_DIGEST_SCORE}% this time."):
+            print("[notify] sent Telegram no-match notice")
+            return True
         return False
 
     top = sorted(jobs, key=lambda j: j["score"], reverse=True)[:5]
